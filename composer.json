@@ -17,6 +17,7 @@
         "laravel/jetstream": "^2.0",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
+        "phpoffice/phpspreadsheet": "^1.16",
         "phpoffice/phpword": "^0.17.0",
         "tightenco/ziggy": "^1.0"
     },
