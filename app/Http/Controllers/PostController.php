@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request as Req;
 use App\Models\Post;
 use App\Models\Comment;
 use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Req $request)
     {
+        if ($request->user()->cannot('viewAny',Post::class)) {
+            abort(403);
+        }
         $data = Post::all();
         $data2;
         if(Request::only('post')){
@@ -33,8 +36,8 @@ class PostController extends Controller
     {
         Post::create(
             Request::validate([
-            'title' => ['required', 'max:5'],
-            'body' => ['required', 'max:10', 'email'],
+            'title' => ['required', 'max:30'],
+            'body' => ['required'],
             ])
         );
             //        Post::create($request->all());
@@ -61,8 +64,8 @@ class PostController extends Controller
     {
         $post->update(
             Request::validate([
-            'title' => ['required', 'max:5'],
-            'body' => ['required', 'max:10', 'email'],
+            'title' => ['required', 'max:30'],
+            'body' => ['required'],
             ])
         );
 

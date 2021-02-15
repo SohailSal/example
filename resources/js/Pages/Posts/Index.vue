@@ -1,28 +1,23 @@
 <template>
     <app-layout>
-        <h1>hello, {{hello}}</h1>
-        <h2>{{hello}}</h2>
         <div v-if="$page.props.flash.success" class="bg-green-600 text-white">
             {{ $page.props.flash.success }}
         </div>
-        <div>
-            <inertia-link class="border bg-indigo-300 rounded-xl px-4 py-2 m-4" :href="route('posts.create')">
-                <span>Create</span>
-            </inertia-link>        
-        </div>
+        <div><h1>hello, {{hello}}</h1></div>
+        <jet-button @click.native="create">Create</jet-button>        
         <div class="">
             <table class="shadow-lg border m-4 rounded-xl">
                 <thead>
                     <tr class="bg-indigo-100">
                         <th class="py-2 px-4 border">Title</th>
-                        <th class="py-2 px-4 border">Body</th>
+                        <th class="py-2 px-4 border w-2/5">Body</th>
                         <th class="py-2 px-4 border">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="item in data" :key="item.id">
                         <td class="py-2 px-4 border">{{item.title}}</td>
-                        <td class="py-2 px-4 border">{{item.body}}</td>
+                        <td class="py-2 px-4 border w-2/5">{{item.body}}</td>
                         <td class="py-2 px-4 border">
                             <inertia-link class="border bg-indigo-300 rounded-xl px-4 py-2 m-4" :href="route('posts.edit', item.id)">
                                 <span>Edit</span>
@@ -89,14 +84,16 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
+    import JetButton from '@/Jetstream/Button'
 //    import { Inertia } from '@inertiajs/inertia'
  
  export default {
         components: {
             AppLayout,
+            JetButton,
         },
 
-        props: ['data','data2'],
+        props: ['data','data2','hello'],
 
         data(){
             return {
@@ -115,12 +112,20 @@
 
         methods: {
 
-            addRow: function() {      
+            addRow() {      
                 this.users.push({name:'',email:'',mobno:''})
             },
 
             deleteRow(index){    
                 this.users.splice(index,1);             
+            },
+            
+            create() {
+            this.$inertia.get(route('posts.create'))
+            }, 
+
+            destroy(id) {
+            this.$inertia.delete(route('posts.destroy', id))
             },
 
         },

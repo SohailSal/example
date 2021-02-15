@@ -4384,6 +4384,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
 //
 //
 //
@@ -4468,18 +4469,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
+
  //    import { Inertia } from '@inertiajs/inertia'
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default,
+    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  props: ['data', 'data2'],
+  props: ['data', 'data2', 'hello'],
   data: function data() {
     return {
       post: 0,
@@ -4507,6 +4505,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteRow: function deleteRow(index) {
       this.users.splice(index, 1);
+    },
+    create: function create() {
+      this.$inertia.get(route('posts.create'));
+    },
+    destroy: function destroy(id) {
+      this.$inertia["delete"](route('posts.destroy', id));
     }
   }
 });
@@ -34648,281 +34652,282 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("app-layout", [
-    _c("h1", [_vm._v("hello, " + _vm._s(_vm.hello))]),
-    _vm._v(" "),
-    _c("h2", [_vm._v(_vm._s(_vm.hello))]),
-    _vm._v(" "),
-    _vm.$page.props.flash.success
-      ? _c("div", { staticClass: "bg-green-600 text-white" }, [
-          _vm._v(
-            "\n        " + _vm._s(_vm.$page.props.flash.success) + "\n    "
+  return _c(
+    "app-layout",
+    [
+      _vm.$page.props.flash.success
+        ? _c("div", { staticClass: "bg-green-600 text-white" }, [
+            _vm._v(
+              "\n        " + _vm._s(_vm.$page.props.flash.success) + "\n    "
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", [_c("h1", [_vm._v("hello, " + _vm._s(_vm.hello))])]),
+      _vm._v(" "),
+      _c(
+        "jet-button",
+        {
+          nativeOn: {
+            click: function($event) {
+              return _vm.create($event)
+            }
+          }
+        },
+        [_vm._v("Create")]
+      ),
+      _vm._v(" "),
+      _c("div", {}, [
+        _c("table", { staticClass: "shadow-lg border m-4 rounded-xl" }, [
+          _c("thead", [
+            _c("tr", { staticClass: "bg-indigo-100" }, [
+              _c("th", { staticClass: "py-2 px-4 border" }, [_vm._v("Title")]),
+              _vm._v(" "),
+              _c("th", { staticClass: "py-2 px-4 border w-2/5" }, [
+                _vm._v("Body")
+              ]),
+              _vm._v(" "),
+              _c("th", { staticClass: "py-2 px-4 border" }, [_vm._v("Actions")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.data, function(item) {
+              return _c("tr", { key: item.id }, [
+                _c("td", { staticClass: "py-2 px-4 border" }, [
+                  _vm._v(_vm._s(item.title))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "py-2 px-4 border w-2/5" }, [
+                  _vm._v(_vm._s(item.body))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "py-2 px-4 border" },
+                  [
+                    _c(
+                      "inertia-link",
+                      {
+                        staticClass:
+                          "border bg-indigo-300 rounded-xl px-4 py-2 m-4",
+                        attrs: { href: _vm.route("posts.edit", item.id) }
+                      },
+                      [_c("span", [_vm._v("Edit")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "border bg-indigo-300 rounded-xl px-4 py-2 m-4",
+                        on: {
+                          click: function($event) {
+                            return _vm.destroy(item.id)
+                          }
+                        }
+                      },
+                      [_c("span", [_vm._v("Delete")])]
+                    )
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
           )
         ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "div",
-      [
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("form", [
+          _c("div", {}, [
+            _c("label", [_vm._v("Select Post:")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.post,
+                    expression: "post"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.post = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { disabled: "", value: "" } }, [
+                  _vm._v("Please select one")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.data, function(dat) {
+                  return _c(
+                    "option",
+                    { key: dat.id, domProps: { value: dat.id } },
+                    [_vm._v(_vm._s(dat.title))]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", {}, [
+            _c("label", [_vm._v("Select Comment:")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {},
+              _vm._l(_vm.data2, function(data) {
+                return _c(
+                  "option",
+                  { key: data.id, domProps: { value: data.id } },
+                  [_vm._v(_vm._s(data.line))]
+                )
+              }),
+              0
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
         _c(
-          "inertia-link",
+          "a",
           {
             staticClass: "border bg-indigo-300 rounded-xl px-4 py-2 m-4",
-            attrs: { href: _vm.route("posts.create") }
+            on: { click: _vm.addRow }
           },
-          [_c("span", [_vm._v("Create")])]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", {}, [
-      _c("table", { staticClass: "shadow-lg border m-4 rounded-xl" }, [
-        _c("thead", [
-          _c("tr", { staticClass: "bg-indigo-100" }, [
-            _c("th", { staticClass: "py-2 px-4 border" }, [_vm._v("Title")]),
-            _vm._v(" "),
-            _c("th", { staticClass: "py-2 px-4 border" }, [_vm._v("Body")]),
-            _vm._v(" "),
-            _c("th", { staticClass: "py-2 px-4 border" }, [_vm._v("Actions")])
-          ])
-        ]),
+          [_vm._v("Add row")]
+        ),
         _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.data, function(item) {
-            return _c("tr", { key: item.id }, [
-              _c("td", { staticClass: "py-2 px-4 border" }, [
-                _vm._v(_vm._s(item.title))
-              ]),
+        _c("table", { staticClass: "table border" }, [
+          _c("thead", {}, [
+            _c("tr", [
+              _c("th", [_vm._v("Name")]),
               _vm._v(" "),
-              _c("td", { staticClass: "py-2 px-4 border" }, [
-                _vm._v(_vm._s(item.body))
-              ]),
+              _c("th", [_vm._v("Email")]),
               _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "py-2 px-4 border" },
-                [
+              _c("th", [_vm._v("Mobile Number")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Action")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.users, function(user, index) {
+              return _c("tr", { key: user.id }, [
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: user.name,
+                        expression: "user.name"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: user.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(user, "name", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: user.email,
+                        expression: "user.email"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: user.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(user, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: user.mobno,
+                        expression: "user.mobno"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: user.mobno },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(user, "mobno", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
                   _c(
-                    "inertia-link",
-                    {
-                      staticClass:
-                        "border bg-indigo-300 rounded-xl px-4 py-2 m-4",
-                      attrs: { href: _vm.route("posts.edit", item.id) }
-                    },
-                    [_c("span", [_vm._v("Edit")])]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
+                    "a",
                     {
                       staticClass:
                         "border bg-indigo-300 rounded-xl px-4 py-2 m-4",
                       on: {
                         click: function($event) {
-                          return _vm.destroy(item.id)
+                          return _vm.deleteRow(index)
                         }
                       }
                     },
-                    [_c("span", [_vm._v("Delete")])]
+                    [_vm._v("Delete")]
                   )
-                ],
-                1
-              )
-            ])
-          }),
-          0
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("form", [
-        _c("div", {}, [
-          _c("label", [_vm._v("Select Post:")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post,
-                  expression: "post"
-                }
-              ],
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.post = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { disabled: "", value: "" } }, [
-                _vm._v("Please select one")
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.data, function(dat) {
-                return _c(
-                  "option",
-                  { key: dat.id, domProps: { value: dat.id } },
-                  [_vm._v(_vm._s(dat.title))]
-                )
-              })
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", {}, [
-          _c("label", [_vm._v("Select Comment:")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {},
-            _vm._l(_vm.data2, function(data) {
-              return _c(
-                "option",
-                { key: data.id, domProps: { value: data.id } },
-                [_vm._v(_vm._s(data.line))]
-              )
+                ])
+              ])
             }),
             0
           )
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel-body" }, [
-      _c(
-        "a",
-        {
-          staticClass: "border bg-indigo-300 rounded-xl px-4 py-2 m-4",
-          on: { click: _vm.addRow }
-        },
-        [_vm._v("Add row")]
-      ),
-      _vm._v(" "),
-      _c("table", { staticClass: "table border" }, [
-        _c("thead", {}, [
-          _c("tr", [
-            _c("th", [_vm._v("Name")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Email")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Mobile Number")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Action")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.users, function(user, index) {
-            return _c("tr", { key: user.id }, [
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: user.name,
-                      expression: "user.name"
-                    }
-                  ],
-                  attrs: { type: "text" },
-                  domProps: { value: user.name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(user, "name", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: user.email,
-                      expression: "user.email"
-                    }
-                  ],
-                  attrs: { type: "text" },
-                  domProps: { value: user.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(user, "email", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: user.mobno,
-                      expression: "user.mobno"
-                    }
-                  ],
-                  attrs: { type: "text" },
-                  domProps: { value: user.mobno },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(user, "mobno", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "border bg-indigo-300 rounded-xl px-4 py-2 m-4",
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteRow(index)
-                      }
-                    }
-                  },
-                  [_vm._v("Delete")]
-                )
-              ])
-            ])
-          }),
-          0
-        )
-      ])
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

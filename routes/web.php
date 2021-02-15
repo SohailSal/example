@@ -60,3 +60,7 @@ Route::delete('posts/{post}', [PostController::class, 'destroy'])
     ->middleware('auth');
 
 Route::get('/word', Word::class)->name('word')->middleware('auth');
+
+Route::get('/create/user','UserController@create');
+Route::get('/update/user/{user}','UserController@edit');
+Route::get('/delete/user/{user}','UserController@destroy');
