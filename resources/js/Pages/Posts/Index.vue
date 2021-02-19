@@ -3,7 +3,7 @@
         <div v-if="$page.props.flash.success" class="bg-green-600 text-white">
             {{ $page.props.flash.success }}
         </div>
-        <p> my name is sheikh </p>
+        <p> my name is JUnaid Shoaib</p>
         <div><h1>hello, {{hello}}</h1></div>
         <jet-button @click.native="create">Create</jet-button>        
         <div class="">
