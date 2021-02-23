@@ -34670,7 +34670,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", [_c("h1", [_vm._v("hello, " + _vm._s(_vm.hello))])]),
+      _c("div", [_c("h1", [_vm._v("hell, " + _vm._s(_vm.hello))])]),
       _vm._v(" "),
       _c(
         "jet-button",

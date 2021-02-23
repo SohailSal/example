@@ -4,7 +4,7 @@
             {{ $page.props.flash.success }}
         </div>
         <p> my name is Muhammad Haris and we are trying to understand the process of pull request across more than one team member</p>
-        <div><h1>hello, {{hello}}</h1></div>
+        <div><h1>hell, {{hello}}</h1></div>
         <jet-button @click.native="create">Create</jet-button>        
         <div class="">
             <table class="shadow-lg border m-4 rounded-xl">
