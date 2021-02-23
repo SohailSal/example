@@ -4469,6 +4469,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  //    import { Inertia } from '@inertiajs/inertia'
 
@@ -34662,6 +34663,12 @@ var render = function() {
             )
           ])
         : _vm._e(),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          " my name is Muhammad Haris and we are trying to understand the process of pull request across more than one team member"
+        )
+      ]),
       _vm._v(" "),
       _c("div", [_c("h1", [_vm._v("hello, " + _vm._s(_vm.hello))])]),
       _vm._v(" "),
