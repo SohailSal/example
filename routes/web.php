@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Word;
+use App\Http\Controllers\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,7 @@ Route::delete('posts/{post}', [PostController::class, 'destroy'])
     ->middleware('auth');
 
 Route::get('/word', Word::class)->name('word')->middleware('auth');
+Route::get('/excel', Excel::class)->name('excel')->middleware('auth');
 
 Route::get('/create/user','UserController@create');
 Route::get('/update/user/{user}','UserController@edit');

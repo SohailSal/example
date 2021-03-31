@@ -13,9 +13,9 @@ class PostController extends Controller
 {
     public function index(Req $request)
     {
-        if ($request->user()->cannot('viewAny',Post::class)) {
-            abort(403);
-        }
+        // if ($request->user()->cannot('viewAny',Post::class)) {
+        //     abort(403);
+        // }
         $data = Post::all();
         $data2;
         if(Request::only('post')){
