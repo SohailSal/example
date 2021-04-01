@@ -15,6 +15,15 @@ class File extends Controller
      */
     public function __invoke(Request $request)
     {
-        Storage::put('me.txt', 'hello world');
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        Storage::disk('public')->put('me.txt', 'hello world');
+        if(Storage::disk('public')->exists('hello.jpg')) {
+            info('hello exists'); // going in log file in storage
+            $out->writeln("Hello exists");
+        }
+        else {
+            info('Nothing here');
+            $out->writeln("Nothing exists");
+        }
     }
 }
