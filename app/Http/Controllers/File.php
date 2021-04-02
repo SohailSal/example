@@ -18,12 +18,12 @@ class File extends Controller
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         Storage::disk('public')->put('me.txt', 'hello world');
         if(Storage::disk('public')->exists('hello.jpg')) {
-            info('hello exists'); // going in log file in storage
+            info('Hello exists'); // going in log file in storage
             $out->writeln("Hello exists");
         }
         else {
             info('Nothing here');
-            $out->writeln("Nothing exists");
+            $out->writeln("Nothing here");
         }
     }
 }
