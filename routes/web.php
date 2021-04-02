@@ -36,6 +36,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('posts', [PostController::class, 'index'])
     ->name('posts')
     ->middleware('auth');
+Route::get('indexx', [PostController::class, 'indexx'])
+    ->name('indexx')
+    ->middleware('auth');
 
 Route::get('posts/create', [PostController::class, 'create'])
     ->name('posts.create')
@@ -63,7 +66,7 @@ Route::delete('posts/{post}', [PostController::class, 'destroy'])
 
 Route::get('/word', Word::class)->name('word')->middleware('auth');
 Route::get('/excel', Excel::class)->name('excel')->middleware('auth');
-Route::get('/file', File::class)->name('file')->middleware('auth');
+Route::post('/file', File::class)->name('file')->middleware('auth');
 
 Route::get('/create/user','UserController@create');
 Route::get('/update/user/{user}','UserController@edit');

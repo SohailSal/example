@@ -27,6 +27,11 @@ class PostController extends Controller
         return Inertia::render('Posts/Index', ['data' => $data, 'data2' => $data2, 'hello' => 'world']);
     }
 
+    public function indexx(Req $request)
+    {
+        return Inertia::render('Posts/Indexx');
+    }
+
     public function create()
     {
         return Inertia::render('Posts/Create');
