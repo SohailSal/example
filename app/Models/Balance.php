@@ -12,4 +12,9 @@ class Balance extends Model
     protected $fillable = [
         'account_id','op_debit','op_credit','t_debit','t_credit','cl_debit','cl_credit'
     ];
+
+    public function account()
+    {
+        return $this->belongsTo('App\Models\Account','account_id');
+    }
 }

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use App\Models\Balance;
+use App\Models\Group;
+use App\Models\Account;
+use App\Models\Type;
 
 class Excel extends Controller
 {
@@ -19,12 +22,14 @@ class Excel extends Controller
     {
         $reader = ReaderEntityFactory::createXLSXReader();
 
-        $reader->open('tb.xlsx');
+        $reader->open('tb2.xlsx');
 
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
  
         foreach ($reader->getSheetIterator() as $sheet) {
             $i=0;
+            $type='';
+            $group='';
             foreach ($sheet->getRowIterator() as $rowIndex => $row) {
                 $col1 = (string) $row->getCellAtIndex(0);
                 $col2 = (string) $row->getCellAtIndex(1);
@@ -34,22 +39,43 @@ class Excel extends Controller
                 $col6 = (string) $row->getCellAtIndex(5);
                 $col7 = (string) $row->getCellAtIndex(6);
                 $col8 = (string) $row->getCellAtIndex(7);
+                $col9 = (string) $row->getCellAtIndex(8);
+                $col10 = (string) $row->getCellAtIndex(9);
 //                $cells = $row->getCells();
 //                $out->writeln($cells);
-                if(strlen($col1)>5){
-                    Balance::create([
-                        'account_id' => 1,
-                        'op_debit' => is_numeric(floatval($col3))? floatval($col3): 0.0, 
-                        'op_credit' => is_numeric(floatval($col4))? floatval($col4): 0.0, 
-                        't_debit' => is_numeric(floatval($col5))? floatval($col5): 0.0, 
-                        't_credit' => is_numeric(floatval($col6))? floatval($col6): 0.0, 
-                        'cl_debit' => is_numeric(floatval($col7))? floatval($col7): 0.0, 
-                        'cl_credit' => is_numeric(floatval($col8))? floatval($col8): 0.0, 
+                if(strlen($col2)>1){
+                    $type = Type::create([
+                        'name' => $col2,
                     ]);
                 }
+                
+                if(strlen($col3)>1){
+                    $group = Group::create([
+                        'name' => $col3,
+                        'type_id' => $type->id,
+                    ]); 
+                }
+
+                if(strlen($col1)>5){
+                    $account = Account::create([
+                        'number' => $col1,
+                        'name' => $col4,
+                        'group_id' => $group->id,
+                    ]);
+                    Balance::create([
+                        'account_id' => $account->id,
+                        'op_debit' => floatval($col3)? floatval($col3): 0.0, 
+                        'op_credit' => floatval($col4)? floatval($col4): 0.0, 
+                        't_debit' => floatval($col5)? floatval($col5): 0.0, 
+                        't_credit' => floatval($col6)? floatval($col6): 0.0, 
+                        'cl_debit' => floatval($col7)? floatval($col7): 0.0, 
+                        'cl_credit' => floatval($col8)? floatval($col8): 0.0, 
+                    ]);
+                }
+
                 $out->writeln($col3.'---'.$col4.'---'.$col5);
                 ++$i;
-                if($i==20) break;
+                if($i==100) break;
             }
             break;
         }
