@@ -12,12 +12,6 @@ use App\Models\Type;
 
 class Excel extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function __invoke(Request $request)
     {
         $reader = ReaderEntityFactory::createXLSXReader();
@@ -64,16 +58,16 @@ class Excel extends Controller
                     ]);
                     Balance::create([
                         'account_id' => $account->id,
-                        'op_debit' => floatval($col3)? floatval($col3): 0.0, 
-                        'op_credit' => floatval($col4)? floatval($col4): 0.0, 
-                        't_debit' => floatval($col5)? floatval($col5): 0.0, 
-                        't_credit' => floatval($col6)? floatval($col6): 0.0, 
-                        'cl_debit' => floatval($col7)? floatval($col7): 0.0, 
-                        'cl_credit' => floatval($col8)? floatval($col8): 0.0, 
+                        'op_debit' => floatval($col5)? floatval($col5): 0.0, 
+                        'op_credit' => floatval($col6)? floatval($col6): 0.0, 
+                        't_debit' => floatval($col7)? floatval($col7): 0.0, 
+                        't_credit' => floatval($col8)? floatval($col8): 0.0, 
+                        'cl_debit' => floatval($col9)? floatval($col9): 0.0, 
+                        'cl_credit' => floatval($col10)? floatval($col10): 0.0, 
                     ]);
                 }
 
-                $out->writeln($col3.'---'.$col4.'---'.$col5);
+//                $out->writeln($col3.'---'.$col4.'---'.$col5);
                 ++$i;
                 if($i==100) break;
             }
