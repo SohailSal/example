@@ -8,8 +8,10 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <welcome />
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+                    <inertia-link class="border bg-indigo-300 rounded-xl px-4 py-2 m-4" :href="route('gen')">
+                        <span>Generate Top Schedule</span>
+                    </inertia-link>        
                 </div>
             </div>
         </div>

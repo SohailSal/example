@@ -4255,6 +4255,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -34580,8 +34582,20 @@ var render = function() {
         _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
           _c(
             "div",
-            { staticClass: "bg-white overflow-hidden shadow-xl sm:rounded-lg" },
-            [_c("welcome")],
+            {
+              staticClass:
+                "bg-white overflow-hidden shadow-xl sm:rounded-lg p-4"
+            },
+            [
+              _c(
+                "inertia-link",
+                {
+                  staticClass: "border bg-indigo-300 rounded-xl px-4 py-2 m-4",
+                  attrs: { href: _vm.route("gen") }
+                },
+                [_c("span", [_vm._v("Generate Top Schedule")])]
+              )
+            ],
             1
           )
         ])
