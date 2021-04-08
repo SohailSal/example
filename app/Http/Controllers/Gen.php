@@ -66,6 +66,10 @@ class Gen extends Controller
 
         $spreadsheet->getActiveSheet()->fromArray($data, NULL, 'A4');
 
+        $spreadsheet->createSheet();
+
+        $spreadsheet->getSheet(1)->fromArray($data, NULL, 'A4');
+
         // $total = 0;
         // for($i=0;$i<$cnt;$i++){
         //     $total = $total + $data[$i]['ledger'];
@@ -86,6 +90,6 @@ class Gen extends Controller
         // $spreadsheet->getActiveSheet()->getStyle($tcell)->applyFromArray($styleArray);
         
         $writer = new Xlsx($spreadsheet);
-        $writer->save('top.xlsx');
+        $writer->save('storage/top.xlsx');
     }
 }
