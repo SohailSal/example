@@ -10,12 +10,6 @@ use App\Models\Balance;
 
 class Gen extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function __invoke(Request $request)
     {
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
@@ -46,7 +40,7 @@ class Gen extends Controller
             )
           );
 
-        $rowArray = ['CODE', 'ACCOUNT NAME', 'DEBIT', 'CREDIT'];
+        $rowArray = ['CODE', 'ACCOUNT NAME', 'CLOSING', 'OPENING'];
         $spreadsheet->getActiveSheet()->fromArray($rowArray, NULL, 'A3');
         
         $widthArray = ['20','50','30','30'];
@@ -55,16 +49,19 @@ class Gen extends Controller
         }
 
         $data = \App\Models\Balance::all()
+                ->filter(function ($bal){
+                    return $bal->account->group->type->name == 'Equity';
+                })
                 ->map(function ($bal){
                     return [
                         'code' => $bal->account->number,
                         'account' => $bal->account->name,
-                        'opening' => floatval($bal->op_debit) - floatval($bal->op_credit),
-                        'closing' => floatval($bal->cl_debit) - floatval($bal->cl_credit),
+                        'closing' => (floatval($bal->cl_debit)>0.0)? floatval($bal->cl_debit) : floatval($bal->cl_credit),
+                        'opening' => (floatval($bal->op_debit)>0.0)? floatval($bal->op_debit) : floatval($bal->op_credit),
                     ];
                 }) 
               ->toArray();
-//dd($data);
+
         $cnt=count($data);
 
         $spreadsheet->getActiveSheet()->fromArray($data, NULL, 'A4');
