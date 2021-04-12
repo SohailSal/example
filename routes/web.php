@@ -8,6 +8,7 @@ use App\Http\Controllers\Word;
 use App\Http\Controllers\Excel;
 use App\Http\Controllers\File;
 use App\Http\Controllers\Gen;
+use App\Http\Controllers\Template;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,7 @@ Route::get('/word', Word::class)->name('word')->middleware('auth');
 Route::get('/excel', Excel::class)->name('excel')->middleware('auth');
 Route::post('/file', File::class)->name('file')->middleware('auth');
 Route::get('/get', Gen::class)->name('gen')->middleware('auth');
+Route::get('/template', Template::class)->name('template')->middleware('auth');
 
 Route::get('/create/user','UserController@create');
 Route::get('/update/user/{user}','UserController@edit');
