@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Word;
 use App\Http\Controllers\Excel;
 use App\Http\Controllers\File;
@@ -64,6 +65,18 @@ Route::put('posts/{post}', [PostController::class, 'update'])
 
 Route::delete('posts/{post}', [PostController::class, 'destroy'])
     ->name('posts.destroy')
+    ->middleware('auth');
+
+Route::get('categories', [CategoryController::class, 'index'])
+    ->name('categories')
+    ->middleware('auth');
+
+Route::get('categories/create', [CategoryController::class, 'create'])
+    ->name('categories.create')
+    ->middleware('auth');
+
+Route::post('categories', [CategoryController::class, 'store'])
+    ->name('categories.store')
     ->middleware('auth');
 
 Route::get('/word', Word::class)->name('word')->middleware('auth');

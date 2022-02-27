@@ -21,6 +21,7 @@
         "laravel/tinker": "^2.5",
         "phpoffice/phpspreadsheet": "^1.16",
         "phpoffice/phpword": "^0.17.0",
+        "staudenmeir/laravel-adjacency-list": "^1.0",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
