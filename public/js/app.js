@@ -4352,6 +4352,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
  //    import { Head, Link } from '@inertiajs/inertia-vue3'
 
 
@@ -35063,9 +35067,18 @@ var render = function() {
                 _vm._v(_vm._s(item.parent_id))
               ]),
               _vm._v(" "),
-              _c("td", { staticClass: "py-2 px-4 border" }, [
-                _vm._v(_vm._s(item.children))
-              ])
+              _c(
+                "td",
+                { staticClass: "py-2 px-4 border" },
+                _vm._l(item.children, function(child) {
+                  return _c("ul", { key: child.id }, [
+                    _c("li", [
+                      _vm._v(_vm._s(child.id) + " -- " + _vm._s(child.name))
+                    ])
+                  ])
+                }),
+                0
+              )
             ])
           }),
           0

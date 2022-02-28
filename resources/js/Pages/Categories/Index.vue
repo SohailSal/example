@@ -23,7 +23,11 @@
                         <td class="py-2 px-4 border">{{item.id}}</td>
                         <td class="py-2 px-4 border">{{item.name}}</td>
                         <td class="py-2 px-4 border">{{item.parent_id}}</td>
-                        <td class="py-2 px-4 border">{{item.children}}</td>
+                        <td class="py-2 px-4 border">
+                            <ul v-for="child in item.children" :key="child.id">
+                                <li>{{child.id}} -- {{child.name}}</li>
+                            </ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>
