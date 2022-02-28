@@ -12,23 +12,23 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $data = Category::all();
+        // $data = Category::all();
 
  //       $data = Category::whereNull('parent_id')->get();
-        $arr = collect();
-        foreach ($data as $item) {
-            $arr->push([
-                'id' => $item->id,
-                'name' => $item->name,
-                'parent_id' => $item->parent_id,
-                'children' => Category::where('parent_id',$item->id)->get()->map(function($sub){
-                    return[
-                        'id' => $sub->id,
-                        'name' => $sub->name,
-                    ];
-                }),
-            ]);
-        }
+        // $arr = collect();
+        // foreach ($data as $item) {
+        //     $arr->push([
+        //         'id' => $item->id,
+        //         'name' => $item->name,
+        //         'parent_id' => $item->parent_id,
+        //         'children' => Category::where('parent_id',$item->id)->get()->map(function($sub){
+        //             return[
+        //                 'id' => $sub->id,
+        //                 'name' => $sub->name,
+        //             ];
+        //         }),
+        //     ]);
+        // }
 //dd($arr);
 
         // $data = Category::whereNull('parent_id')->get()->map(function($sub){
@@ -46,14 +46,11 @@ class CategoryController extends Controller
         // }
 
         //        dd($arr);
-     $data = $arr;
+ //    $data = $arr;
 //        dd($data);
 
-
-$categories = Category::tree()->get()->toTree();
-$data = $categories;
-//dd($categories);
-        return Inertia::render('Categories/Index', ['data' => $data, 'categories' => $categories]);
+        $data = Category::tree()->get()->toTree();
+        return Inertia::render('Categories/Index', ['data' => $data]);
     }
 
     public function create()

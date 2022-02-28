@@ -8,13 +8,13 @@
                 <span>Create</span>
             </inertia-link>        
         </div>
-        <div class="">
+        <div>
             <table class="shadow-lg border m-4 rounded-xl">
                 <thead>
                     <tr class="bg-indigo-100">
                         <th class="py-2 px-4 border">ID</th>
                         <th class="py-2 px-4 border">Name</th>
-                        <th class="py-2 px-4 border">Parent ID</th>
+                        <!-- <th class="py-2 px-4 border">Parent ID</th> -->
                         <th class="py-2 px-4 border">Children</th>
                     </tr>
                 </thead>
@@ -22,31 +22,26 @@
                     <tr v-for="item in data" :key="item.id">
                         <td class="py-2 px-4 border">{{item.id}}</td>
                         <td class="py-2 px-4 border">{{item.name}}</td>
-                        <td class="py-2 px-4 border">{{item.parent_id}}</td>
+                        <!-- <td class="py-2 px-4 border">{{item.parent_id}}</td> -->
                         <td class="py-2 px-4 border">
-                            <ul v-for="child in item.children" :key="child.id">
-                                <li>{{child.id}} -- {{child.name}}</li>
-                            </ul>
+                            <my-tree :children="item.children"></my-tree>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div>
-            <sol-label>Hello</sol-label>
         </div>
     </app-layout>
 </template>
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
+    import MyTree from '@/Components/Tree'
 //    import { Head, Link } from '@inertiajs/inertia-vue3'
-    import SolLabel from '@/Components/Label'
 
  export default {
         components: {
             AppLayout,
-            SolLabel,
+            MyTree,
   //          Head,
   //          Link
         },
