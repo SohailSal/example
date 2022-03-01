@@ -55,7 +55,8 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return Inertia::render('Categories/Create');
+        $data = Category::tree()->get()->toTree();
+        return Inertia::render('Categories/Create', ['data' => $data]);
     }
 
     public function store()

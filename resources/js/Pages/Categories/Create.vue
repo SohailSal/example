@@ -12,20 +12,24 @@
                     <button class="border bg-indigo-300 rounded-xl px-4 py-2 m-4" type="submit">Create Category</button>
                 </div>
             </form>
+            <my-drop :children="data"></my-drop>
         </div>
     </app-layout>
 </template>
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
+    import MyDrop from '@/Components/Drop'
 
     export default {
         components: {
             AppLayout,
+            MyDrop,
         },
 
         props: {
-            errors : Object    
+            errors : Object,
+            data: Object,
         },
 
         data() {
