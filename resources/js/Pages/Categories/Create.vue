@@ -12,7 +12,10 @@
                     <button class="border bg-indigo-300 rounded-xl px-4 py-2 m-4" type="submit">Create Category</button>
                 </div>
             </form>
-            <my-drop :children="data"></my-drop>
+            <my-drop :children="data" @onSelect="updateParent"></my-drop>
+            <div>
+                {{vari}}
+            </div>
         </div>
     </app-layout>
 </template>
@@ -38,11 +41,15 @@
                     name: null,
                     parent_id: null,
                 },
+                vari: 0,
             }
         },
         methods: {
             submit() {
             this.$inertia.post(this.route('categories.store'), this.form)
+            },
+            updateParent(vari){
+                this.vari = vari
             },
         },
     }
