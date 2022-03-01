@@ -16,6 +16,9 @@
             <div>
                 {{vari}}
             </div>
+            <div>
+                <treeselect v-model="value" :multiple="true" :options="data" :normalizer="normalizer"/>
+            </div>
         </div>
     </app-layout>
 </template>
@@ -23,11 +26,14 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import MyDrop from '@/Components/Drop'
+    import Treeselect from '@riophae/vue-treeselect'
+    import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
     export default {
         components: {
             AppLayout,
             MyDrop,
+            Treeselect,
         },
 
         props: {
@@ -42,6 +48,32 @@
                     parent_id: null,
                 },
                 vari: 0,
+
+                value: null,
+                options: [ {
+                id: 'a',
+                label: 'a',
+                children: [ {
+                    id: 'aa',
+                    label: 'aa',
+                }, {
+                    id: 'ab',
+                    label: 'ab',
+                } ],
+                }, {
+                id: 'b',
+                label: 'b',
+                }, {
+                id: 'c',
+                label: 'c',
+                } ],
+
+                normalizer(node) {
+                    return {
+                        label: node.name,
+                    }
+                },
+
             }
         },
         methods: {
