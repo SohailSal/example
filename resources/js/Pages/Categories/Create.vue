@@ -17,7 +17,7 @@
                 {{vari}}
             </div>
             <div>
-                <treeselect v-model="value" :multiple="true" :options="data" :normalizer="normalizer"/>
+                <treeselect v-model="value" max-height=150 :multiple="false" :options="data" :normalizer="normalizer" v-on:select="treeChange" style="max-width:300px"/>
             </div>
         </div>
     </app-layout>
@@ -38,7 +38,7 @@
 
         props: {
             errors : Object,
-            data: Object,
+            data: Array,
         },
 
         data() {
@@ -50,23 +50,6 @@
                 vari: 0,
 
                 value: null,
-                options: [ {
-                id: 'a',
-                label: 'a',
-                children: [ {
-                    id: 'aa',
-                    label: 'aa',
-                }, {
-                    id: 'ab',
-                    label: 'ab',
-                } ],
-                }, {
-                id: 'b',
-                label: 'b',
-                }, {
-                id: 'c',
-                label: 'c',
-                } ],
 
                 normalizer(node) {
                     return {
@@ -82,6 +65,11 @@
             },
             updateParent(vari){
                 this.vari = vari
+            },
+            treeChange(node, instanceId){
+                this.value = node.id
+                alert(node.name + '---' + this.value)
+//                this.$inertia.get(route('categories', {'cat':this.value}))
             },
         },
     }

@@ -8570,7 +8570,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     errors: Object,
-    data: Object
+    data: Array
   },
   data: function data() {
     return {
@@ -8580,23 +8580,6 @@ __webpack_require__.r(__webpack_exports__);
       },
       vari: 0,
       value: null,
-      options: [{
-        id: 'a',
-        label: 'a',
-        children: [{
-          id: 'aa',
-          label: 'aa'
-        }, {
-          id: 'ab',
-          label: 'ab'
-        }]
-      }, {
-        id: 'b',
-        label: 'b'
-      }, {
-        id: 'c',
-        label: 'c'
-      }],
       normalizer: function normalizer(node) {
         return {
           label: node.name
@@ -8610,6 +8593,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateParent: function updateParent(vari) {
       this.vari = vari;
+    },
+    treeChange: function treeChange(node, instanceId) {
+      this.value = node.id;
+      alert(node.name + '---' + this.value); //                this.$inertia.get(route('categories', {'cat':this.value}))
     }
   }
 });
@@ -40551,11 +40538,14 @@ var render = function() {
           "div",
           [
             _c("treeselect", {
+              staticStyle: { "max-width": "300px" },
               attrs: {
-                multiple: true,
+                "max-height": "150",
+                multiple: false,
                 options: _vm.data,
                 normalizer: _vm.normalizer
               },
+              on: { select: _vm.treeChange },
               model: {
                 value: _vm.value,
                 callback: function($$v) {
