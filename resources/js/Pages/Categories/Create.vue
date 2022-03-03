@@ -65,19 +65,14 @@
             },
             updateParent(vari){
                 this.vari = vari
+                var arr = this.data.filter(function(value){
+                    return value.id == vari
+                })
+                console.log(JSON.stringify(arr))
             },
             treeChange(node, instanceId){
                 this.value = node.id
-
-                var arr = this.data.filter(function(value){
-                    // if(value.id == 2)
-                    // return value
-                    // else
-                    // return false
-                    return value.id == 2
-                })
-
-                alert(node.name + ' --- ' + this.value + ' --- ' + JSON.stringify(arr))
+                alert(node.name + ' --- ' + this.value)
 //                this.$inertia.get(route('categories', {'cat':this.value}))
             },
         },
