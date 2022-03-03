@@ -6113,7 +6113,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['children'],
-  name: 'my-tree',
+  name: 'my-drop',
   methods: {
     update: function update(event) {
       //                console.log(event.target.value)
@@ -8596,7 +8596,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     treeChange: function treeChange(node, instanceId) {
       this.value = node.id;
-      alert(node.name + '---' + this.value); //                this.$inertia.get(route('categories', {'cat':this.value}))
+      var arr = this.data.filter(function (value) {
+        // if(value.id == 2)
+        // return value
+        // else
+        // return false
+        return value.id == 2;
+      });
+      alert(node.name + ' --- ' + this.value + ' --- ' + JSON.stringify(arr)); //                this.$inertia.get(route('categories', {'cat':this.value}))
     }
   }
 });

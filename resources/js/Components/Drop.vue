@@ -9,7 +9,7 @@
 <script>
     export default {
         props: ['children'],
-        name: 'my-tree',
+        name: 'my-drop',
         methods: {
             update(event){
 //                console.log(event.target.value)
