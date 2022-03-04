@@ -50,7 +50,15 @@ class CategoryController extends Controller
 //        dd($data);
 
         $data = Category::tree()->get()->toTree();
-        return Inertia::render('Categories/Index', ['data' => $data]);
+        $data = $data->map(function($value){
+            return [
+                'id' => $value->id,
+                'name' => $value->name,
+                'children' => $value->children,
+            ];
+        });
+//        dd($data);
+        return Inertia::render('Categories/Index', ['data' => $data->toArray()]);
     }
 
     public function create()

@@ -12,7 +12,7 @@
                     <button class="border bg-indigo-300 rounded-xl px-4 py-2 m-4" type="submit">Create Category</button>
                 </div>
             </form>
-            <my-drop :children="data" @onSelect="updateParent"></my-drop>
+            <my-drop :children="arr" @onSelect="updateParent"></my-drop>
             <div>
                 {{vari}}
             </div>
@@ -47,9 +47,11 @@
                     name: null,
                     parent_id: null,
                 },
-                vari: 0,
 
+                vari: 0,
                 value: null,
+                arr: this.data,
+                selected: [],
 
                 normalizer(node) {
                     return {
@@ -65,10 +67,12 @@
             },
             updateParent(vari){
                 this.vari = vari
-                var arr = this.data.filter(function(value){
+                parent = this.data.filter(function(value){
                     return value.id == vari
                 })
-                console.log(JSON.stringify(arr))
+                this.selected.push(vari)
+                console.log(Object.entries(parent))
+                console.log(this.selected)
             },
             treeChange(node, instanceId){
                 this.value = node.id

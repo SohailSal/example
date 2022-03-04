@@ -6111,6 +6111,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['children'],
   name: 'my-drop',
@@ -8580,6 +8581,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       vari: 0,
       value: null,
+      arr: this.data,
+      selected: [],
       normalizer: function normalizer(node) {
         return {
           label: node.name
@@ -8593,10 +8596,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateParent: function updateParent(vari) {
       this.vari = vari;
-      var arr = this.data.filter(function (value) {
+      parent = this.data.filter(function (value) {
         return value.id == vari;
       });
-      console.log(JSON.stringify(arr));
+      this.selected.push(vari);
+      console.log(Object.entries(parent));
+      console.log(this.selected);
     },
     treeChange: function treeChange(node, instanceId) {
       this.value = node.id;
@@ -35823,12 +35828,18 @@ var render = function() {
     _c(
       "select",
       { on: { change: _vm.update } },
-      _vm._l(_vm.children, function(child) {
-        return _c("option", { key: child.id, domProps: { value: child.id } }, [
-          _vm._v(_vm._s(child.name))
-        ])
-      }),
-      0
+      [
+        _c("option", { attrs: { value: "0" } }, [_vm._v("Select a Category")]),
+        _vm._v(" "),
+        _vm._l(_vm.children, function(child) {
+          return _c(
+            "option",
+            { key: child.id, domProps: { value: child.id } },
+            [_vm._v(_vm._s(child.name))]
+          )
+        })
+      ],
+      2
     )
   ])
 }
@@ -40532,7 +40543,7 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("my-drop", {
-          attrs: { children: _vm.data },
+          attrs: { children: _vm.arr },
           on: { onSelect: _vm.updateParent }
         }),
         _vm._v(" "),
