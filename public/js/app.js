@@ -29371,6 +29371,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -29386,7 +29389,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: ['data'],
   data: function data() {
-    return {};
+    return {
+      selected: 'Select category'
+    };
   },
   methods: {}
 });
@@ -72125,7 +72130,36 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", [_c("tree-select", { attrs: { treeData: _vm.data } })], 1)
+      _c(
+        "div",
+        [
+          _c("tree-select", {
+            attrs: {
+              treeData: _vm.data,
+              replaceFields: {
+                children: "children",
+                title: "name",
+                key: "id",
+                value: "id"
+              },
+              showSearch: "true",
+              treeDefaultExpandAll: "true"
+            },
+            model: {
+              value: _vm.selected,
+              callback: function($$v) {
+                _vm.selected = $$v
+              },
+              expression: "selected"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n                " + _vm._s(_vm.selected) + "\n            ")
+      ])
     ])
   ])
 }

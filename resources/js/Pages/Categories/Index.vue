@@ -30,7 +30,10 @@
                 </tbody>
             </table>
             <div>
-				<tree-select :treeData="data"></tree-select>
+				<tree-select v-model="selected" :treeData="data" :replaceFields="{ children:'children', title:'name', key:'id', value: 'id' }" showSearch="true" treeDefaultExpandAll="true"></tree-select>
+            </div>
+            <div>
+                {{selected}}
             </div>
         </div>
     </app-layout>
@@ -54,7 +57,7 @@
         props: ['data'],
         data(){
             return {
-                
+                selected: 'Select category',
             }
         },
         methods: {
