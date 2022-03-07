@@ -64,7 +64,14 @@ class CategoryController extends Controller
     public function create()
     {
         $data = Category::tree()->get()->toTree();
-        return Inertia::render('Categories/Create', ['data' => $data]);
+        $data = $data->map(function($value){
+            return [
+                'id' => $value->id,
+                'name' => $value->name,
+                'children' => $value->children,
+            ];
+        });
+        return Inertia::render('Categories/Create', ['data' => $data->toArray()]);
     }
 
     public function store()

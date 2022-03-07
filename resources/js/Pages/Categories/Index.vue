@@ -29,6 +29,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div>
+				<tree-select :treeData="data"></tree-select>
+            </div>
         </div>
     </app-layout>
 </template>
@@ -36,12 +39,15 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import MyTree from '@/Components/Tree'
+	import TreeSelect from 'ant-design-vue/lib/tree-select'
+	import 'ant-design-vue/dist/antd.css'
 //    import { Head, Link } from '@inertiajs/inertia-vue3'
 
  export default {
         components: {
             AppLayout,
             MyTree,
+            TreeSelect,
   //          Head,
   //          Link
         },
