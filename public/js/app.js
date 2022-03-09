@@ -29286,11 +29286,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$inertia.post(this.route('categories.store'), this.form);
     },
     updateParent: function updateParent(vari) {
-      this.vari = vari;
       var parent = this.data.filter(function (value) {
         return value.id == vari;
       });
-      this.selected.push(vari);
       var child = parent.map(function (item, index) {
         return item.children;
       });
@@ -29305,6 +29303,8 @@ __webpack_require__.r(__webpack_exports__);
       //~ }
       //                console.log(typeof parent)
 
+      this.vari = vari;
+      this.selected.push(vari);
       console.log(JSON.stringify(this.arr));
       console.log(JSON.stringify(this.arrr));
       console.log(this.selected);
