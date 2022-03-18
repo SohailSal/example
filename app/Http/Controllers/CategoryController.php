@@ -85,4 +85,18 @@ class CategoryController extends Controller
         return Redirect::route('categories')->with('success', 'Category created.');
     }
 
+    public function indexx()
+    {
+        $data = Category::tree()->get()->toTree();
+        $data = $data->map(function($value){
+            return [
+                'id' => $value->id,
+                'name' => $value->name,
+                'children' => $value->children,
+            ];
+        });
+        return Inertia::render('Categories/Indexx', ['data' => $data->toArray()]);
+    }
+
+
 }

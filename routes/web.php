@@ -79,6 +79,9 @@ Route::post('categories', [CategoryController::class, 'store'])
     ->name('categories.store')
     ->middleware('auth');
 
+Route::get('categories/indexx', [CategoryController::class, 'indexx'])
+    ->name('categories.indexx');
+
 Route::get('/word', Word::class)->name('word')->middleware('auth');
 Route::get('/excel', Excel::class)->name('excel')->middleware('auth');
 Route::post('/file', File::class)->name('file')->middleware('auth');
